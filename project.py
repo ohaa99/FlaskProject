@@ -115,7 +115,7 @@ def fbdisconnect():
     result = h.request(url, 'DELETE')[1]
     return "you have been logged out"
 
-
+@app.route('/gconnect', methods=['POST'])
 def gconnect():
     # Validate state token
     if request.args.get('state') != login_session['state']:
@@ -239,7 +239,7 @@ def gdisconnect():
         response.headers['Content-Type'] = 'application/json'
         return response
 
-@app.route('/logout')
+@app.route('/disconnect')
 def disconnect():
     if 'provider' in login_session:
         if login_session['provider'] == 'google':
@@ -289,10 +289,7 @@ def getUserID(email):
     except:
         return None
 
-# user_id = getUserID(login_session['email'])
-# if user_id:
-#     user_id = createUser(login_session)
-#     login_session['user_id'] = user_id
+
 
 
 #JSON APIs to view Restaurant Information
